@@ -1,0 +1,100 @@
+.selected {
+    background-color: #ffffff;
+    display: inline-block;
+    padding:10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+    margin-top: 10px;
+    width:420px;
+    padding:15px;
+    z-index:1000;
+    background-color: #ffffff;
+}
+
+.headerContainer {
+    display:flex;
+    flex-wrap: wrap;
+    width:420px;
+    justify-content: space-between;
+    padding:5px;
+}
+
+.monthHeader {
+    display: inline-block;
+    padding:10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:rgb(53, 53, 245);
+}
+
+.yearHeader {
+    display: inline-block;
+    padding:10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:rgb(53, 53, 245);
+}
+
+.weekHeader {
+    width:100%;
+    padding-top:10px;
+}
+
+.left {
+    height:10px;
+    width:10px;
+    cursor:pointer;
+}
+
+.right{
+    transform: rotate(180deg);
+    height:10px;
+    width:10px;
+    cursor:pointer;
+}
+
+.dayHeader {
+    height : 50px;
+    width : 60px;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    padding:10px;
+    color: grey;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.inactive {
+    color:grey;
+    cursor: not-allowed;
+}
+
+.weekContainer {
+
+}
+
+
+.active {
+    cursor:pointer;
+}
+
+.dayContainer {
+    height : 40px;
+    width : 60px;
+    display: inline-block;
+    padding:10px;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.active:hover {
+    border:1px dotted  rgb(53, 53, 245);
+    background-color: rgb(145, 145, 248);
+    color:#ffffff;
+}
+
+.selectedDate {
+    background-color: rgb(53, 53, 245);
+    color:#ffffff;
+}

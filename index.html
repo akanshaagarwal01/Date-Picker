@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title>Date Picker</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body style="background-color: rgba(3, 3, 61, 0.938)">
+    <script src="month.js"></script>
+    <script src="calendar.js"></script>
+    <script src="headers.js"></script>
+    <script src="datePicker.js"></script>
+    <script>
+        let particulars = {
+            initialDateSelection: new Date(),
+            currentDateSelection: new Date(),
+            id: 'from'
+        };
+        function callDatePicker() {
+            let button = document.getElementById("pickDate");
+            button.style.display = "none";
+            let parent = document.getElementById('parent');
+            let dp = new DatePicker(parent, particulars);
+            console.log(dp._particulars);
+        }
+    </script>
+    <div id="parent">
+        <button id="pickDate" onclick="callDatePicker()">Pick Date</button>
+    </div>
+
+</body>
+
+</html>
