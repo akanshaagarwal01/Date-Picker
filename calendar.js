@@ -4,8 +4,7 @@
         this._monthObj = new Month();
     }
 
-    Calendar.prototype.renderCalendar = function (currDateSelection, datePicker) {
-        console.log(datePicker);
+    Calendar.prototype.renderCalendar = function (currDateSelection, minDate, maxDate, datePicker) {
         let year = currDateSelection.getFullYear();
         let month = currDateSelection.getMonth();
         let dd = currDateSelection.getDate();
@@ -77,7 +76,6 @@
             datePicker._particulars.currentDateSelection = date;
             document.getElementById(`selected-${this._id}`).innerHTML =
                 `${event.target.textContent}-${this._monthObj.getMonthInWords(month)}-${year}`;
-            document.getElementById('pickDate').style.display = "";
             document.getElementById(`container-${this._id}`).remove();
         }
     }

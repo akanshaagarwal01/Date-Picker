@@ -14,19 +14,17 @@
         let particulars = {
             initialDateSelection: new Date(),
             currentDateSelection: new Date(),
+            minDate: new Date(2012, 5, 13),
+            maxDate: new Date(2025, 3, 12),
             id: 'from'
         };
         function callDatePicker() {
-            let button = document.getElementById("pickDate");
-            button.style.display = "none";
-            let parent = document.getElementById('parent');
+            let parent = document.getElementById("parent");
             let dp = new DatePicker(parent, particulars);
-            console.log(dp._particulars);
+            // document.body.removeEventListener("click", dp.hideDatePicker);
         }
     </script>
-    <div id="parent">
-        <button id="pickDate" onclick="callDatePicker()">Pick Date</button>
-    </div>
+    <button id="parent" onclick="callDatePicker()">Pick Date</button>
 
 </body>
 

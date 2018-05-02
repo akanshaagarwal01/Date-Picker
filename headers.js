@@ -6,17 +6,17 @@
         this._DOMElements = {};
     }
 
-    Headers.prototype.initializeDOM = function (datePicker) {
+    Headers.prototype.initializeDOM = function (currDateSelection, minDate, maxDate, datePicker) {
         this._DOMElements = {
             monthName: document.getElementById(`monthName-${this._id}`),
             yearName: document.getElementById(`yearName-${this._id}`),
             monthHeader: document.getElementById(`monthHeader-${this._id}`),
             yearHeader: document.getElementById(`yearHeader-${this._id}`)
         };
-        this._DOMElements.monthHeader.querySelector('.left').addEventListener("click", this.showPreviousMonth.bind(this, datePicker));
-        this._DOMElements.monthHeader.querySelector('.right').addEventListener("click", this.showNextMonth.bind(this, datePicker));
-        this._DOMElements.yearHeader.querySelector('.left').addEventListener("click", this.showPreviousYear.bind(this, datePicker));
-        this._DOMElements.yearHeader.querySelector('.right').addEventListener("click", this.showNextYear.bind(this, datePicker));
+        this._DOMElements.monthHeader.querySelector('.left').addEventListener("click", this.showPreviousMonth.bind(this, currDateSelection, minDate, maxDate, datePicker));
+        this._DOMElements.monthHeader.querySelector('.right').addEventListener("click", this.showNextMonth.bind(this, currDateSelection, minDate, maxDate, datePicker));
+        this._DOMElements.yearHeader.querySelector('.left').addEventListener("click", this.showPreviousYear.bind(this, currDateSelection, minDate, maxDate, datePicker));
+        this._DOMElements.yearHeader.querySelector('.right').addEventListener("click", this.showNextYear.bind(this, currDateSelection, minDate, maxDate, datePicker));
     }
 
     Headers.prototype.renderHeaders = function (currDateSelection, datePicker) {
@@ -35,36 +35,49 @@
         monthHeader.className = "monthHeader";
         monthHeader.id = `monthHeader-${this._id}`;
         let sHtml = `<img class = "left" src = "images/chevron-left.png"> 
-        <text class = "monthName" id = "monthName-${this._id}" >${this._monthObj.getMonthInWords(currDateSelection.getMonth())}</text>
-            <img class = "right" src = "images/chevron-left.png" > `;
+            <text class = "monthName" id = "monthName-${this._id}" >${this._monthObj.getMonthInWords(currDateSelection.getMonth())}</text>
+                <img class = "right" src = "images/chevron-left.png" > `;
         monthHeader.innerHTML = sHtml;
         return monthHeader;
     }
 
-    Headers.prototype.showPreviousMonth = function (datePicker, e) {
-        let prevMonth = +this._monthObj.getMonthInNumber(this._DOMElements.monthName.textContent) - 1;
+    Headers.prototype.showPreviousMonth = function (currDateSelection, minDate, maxDate, datePicker, e) {
+        let currMonth = +this._monthObj.getMonthInNumber(this._DOMElements.monthName.textContent);
         let yearName = +this._DOMElements.yearName.textContent;
-        if (prevMonth < 0) {
-            prevMonth = 11;
-            yearName = this._DOMElements.yearName.textContent - 1;
-            this._DOMElements.yearName.textContent = yearName;
+        if (yearName > +minDate.getFullYear() ||
+            (yearName === +minDate.getFullYear() &&
+                currMonth > +minDate.getMonth())) {
+            let prevMonth = currMonth - 1;
+
+            if (prevMonth < 0) {
+                prevMonth = 11;
+                yearName = +this._DOMElements.yearName.textContent - 1;
+                this._DOMElements.yearName.textContent = yearName;
+            }
+            this._DOMElements.monthName.textContent = this._monthObj.getMonthInWords(prevMonth);
+            let date = new Date(yearName, prevMonth, 1);
+            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
         }
-        this._DOMElements.monthName.textContent = this._monthObj.getMonthInWords(prevMonth);
-        let date = new Date(yearName, prevMonth, 1);
-        document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+        else alert("Date can't be lesser than minimum Date");
     }
 
-    Headers.prototype.showNextMonth = function (datePicker, e) {
-        let nextMonth = +this._monthObj.getMonthInNumber(this._DOMElements.monthName.textContent) + 1;
+    Headers.prototype.showNextMonth = function (currDateSelection, minDate, maxDate, datePicker, e) {
+        let currMonth = +this._monthObj.getMonthInNumber(this._DOMElements.monthName.textContent);
         let yearName = +this._DOMElements.yearName.textContent;
-        if (nextMonth > 11) {
-            nextMonth = 0;
-            yearName = this._DOMElements.yearName.textContent + 1;
-            this._DOMElements.yearName.textContent = yearName;
+        if (yearName < +maxDate.getFullYear() ||
+            (yearName === +maxDate.getFullYear() &&
+                currMonth < +maxDate.getMonth())) {
+            let nextMonth = currMonth + 1;
+            if (nextMonth > 11) {
+                nextMonth = 0;
+                yearName = +this._DOMElements.yearName.textContent + 1;
+                this._DOMElements.yearName.textContent = yearName;
+            }
+            this._DOMElements.monthName.textContent = this._monthObj.getMonthInWords(nextMonth);
+            let date = new Date(yearName, nextMonth, 1);
+            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
         }
-        this._DOMElements.monthName.textContent = this._monthObj.getMonthInWords(nextMonth);
-        let date = new Date(yearName, nextMonth, 1);
-        document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+        else alert("Date can't be more than maximum Date");
     }
 
     Headers.prototype.renderYearHeader = function (currDateSelection, datePicker) {
@@ -78,20 +91,30 @@
         return yearHeader;
     }
 
-    Headers.prototype.showPreviousYear = function (datePicker, e) {
-        let yearName = +this._DOMElements.yearName.textContent - 1;
+    Headers.prototype.showPreviousYear = function (currDateSelection, minDate, maxDate, datePicker, e) {
+        let currYear = +this._DOMElements.yearName.textContent;
         let monthName = +this._monthObj.getMonthInNumber(this._DOMElements.monthName.textContent);
-        this._DOMElements.yearName.textContent = yearName;
-        let date = new Date(yearName, monthName, 1);
-        document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+        if (currYear > +minDate.getFullYear() + 1
+            || (currYear === +minDate.getFullYear() + 1 && +monthName >= +minDate.getMonth())) {
+            yearName = +currYear - 1;
+            this._DOMElements.yearName.textContent = yearName;
+            let date = new Date(yearName, monthName, 1);
+            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+        }
+        else alert("Date can't be more than maximum Date");
     }
 
-    Headers.prototype.showNextYear = function (datePicker, e) {
-        let yearName = +this._DOMElements.yearName.textContent + 1;
+    Headers.prototype.showNextYear = function (currDateSelection, minDate, maxDate, datePicker, e) {
+        let currYear = +this._DOMElements.yearName.textContent;
         let monthName = +this._monthObj.getMonthInNumber(this._DOMElements.monthName.textContent);
-        this._DOMElements.yearName.textContent = yearName;
-        let date = new Date(yearName, monthName, 1);
-        document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+        if (currYear < +maxDate.getFullYear() - 1
+            || (currYear === +maxDate.getFullYear() - 1 && +monthName <= +maxDate.getMonth())) {
+            let yearName = +currYear + 1;
+            this._DOMElements.yearName.textContent = yearName;
+            let date = new Date(yearName, monthName, 1);
+            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+        }
+        else alert("Date can't be more than maximum Date");
     }
 
     Headers.prototype.renderWeekHeader = function () {

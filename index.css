@@ -3,12 +3,14 @@
     display: inline-block;
     padding:10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: absolute;
 }
 
 .container {
     margin-top: 10px;
     width:420px;
     padding:15px;
+    position: absolute;
     z-index:1000;
     background-color: #ffffff;
 }
@@ -18,7 +20,7 @@
     flex-wrap: wrap;
     width:420px;
     justify-content: space-between;
-    padding:5px;
+    padding:5px 0px;
 }
 
 .monthHeader {
@@ -89,9 +91,9 @@
 }
 
 .active:hover {
-    border:1px dotted  rgb(53, 53, 245);
     background-color: rgb(145, 145, 248);
     color:#ffffff;
+    box-sizing: border-box;
 }
 
 .selectedDate {
