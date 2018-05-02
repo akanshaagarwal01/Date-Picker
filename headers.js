@@ -56,7 +56,7 @@
             }
             this._DOMElements.monthName.textContent = this._monthObj.getMonthInWords(prevMonth);
             let date = new Date(yearName, prevMonth, 1);
-            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, minDate, maxDate, datePicker));
         }
         else alert("Date can't be lesser than minimum Date");
     }
@@ -75,7 +75,7 @@
             }
             this._DOMElements.monthName.textContent = this._monthObj.getMonthInWords(nextMonth);
             let date = new Date(yearName, nextMonth, 1);
-            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, minDate, maxDate, datePicker));
         }
         else alert("Date can't be more than maximum Date");
     }
@@ -99,7 +99,7 @@
             yearName = +currYear - 1;
             this._DOMElements.yearName.textContent = yearName;
             let date = new Date(yearName, monthName, 1);
-            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, minDate, maxDate, datePicker));
         }
         else alert("Date can't be more than maximum Date");
     }
@@ -112,7 +112,7 @@
             let yearName = +currYear + 1;
             this._DOMElements.yearName.textContent = yearName;
             let date = new Date(yearName, monthName, 1);
-            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, datePicker));
+            document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, minDate, maxDate, datePicker));
         }
         else alert("Date can't be more than maximum Date");
     }

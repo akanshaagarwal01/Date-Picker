@@ -56,7 +56,6 @@
         selected.id = `selected-${this._id}`;
         selected.className = "selected";
         selected.innerHTML = `${this._currDateSelection.getDate()}-${this._monthObj.getMonthInWords(this._currDateSelection.getMonth())}-${this._currDateSelection.getFullYear()}`;
-        console.log(parentDimensions);
         selected.style.top = +parentDimensions.bottom + 10 + 'px';
         selected.style.left = +parentDimensions.left + 'px';
         return selected;

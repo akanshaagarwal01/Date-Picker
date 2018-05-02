@@ -17,11 +17,11 @@
             let weekContainer = document.createElement('div');
             weekContainer.className = "weekContainer";
             for (let i = firstDay; i > 0; i--) {
-                let dayContainer = makeDayContainer(true, { year, month, date: date.getDate() - i });
+                let dayContainer = makeDayContainer(true, { year, month, date: date.getDate() - i }, minDate, maxDate);
                 weekContainer.appendChild(dayContainer);
             }
             for (let i = firstDay; i <= 6; i++) {
-                let dayContainer = makeDayContainer(false, { date });
+                let dayContainer = makeDayContainer(false, { date }, minDate, maxDate);
                 weekContainer.appendChild(dayContainer);
                 date.setDate(date.getDate() + 1);
             }
@@ -30,7 +30,7 @@
         let weekContainer = document.createElement('div');
         weekContainer.className = "weekContainer";
         while (date.getMonth() === month) {
-            let dayContainer = makeDayContainer(false, { date });
+            let dayContainer = makeDayContainer(false, { date }, minDate, maxDate);
             weekContainer.appendChild(dayContainer);
             if (date.getDay() === 6) {
                 monthContainer.append(weekContainer);
@@ -43,15 +43,22 @@
         if (date.getDay() < 6) {
             for (let i = date.getDay(); i <= 6; i++) {
                 weekContainer = monthContainer.lastElementChild;
-                let dayContainer = makeDayContainer(true, { year, month: date.getMonth(), date: date.getDate() });
+                let dayContainer = makeDayContainer(true, { year, month: date.getMonth(), date: date.getDate() }, minDate, maxDate);
                 weekContainer.appendChild(dayContainer);
                 date.setDate(date.getDate() + 1);
             }
         }
 
-        function makeDayContainer(custom, dateObj) {
+        function makeDayContainer(custom, dateObj, minDate, maxDate) {
+            let offRange = false;
+            if (!custom && ((dateObj.date.getFullYear() === minDate.getFullYear() && dateObj.date.getMonth() === minDate.getMonth()
+                && dateObj.date.getDate() < minDate.getDate()) ||
+                (dateObj.date.getFullYear() === maxDate.getFullYear() && dateObj.date.getMonth() === maxDate.getMonth()
+                    && dateObj.date.getDate() > maxDate.getDate()))) {
+                offRange = true;
+            }
             let dayContainer = document.createElement('div');
-            dayContainer.className = custom ? "dayContainer inactive" : "dayContainer active";
+            dayContainer.className = (custom || offRange) ? "dayContainer inactive" : "dayContainer active";
             dayContainer.innerHTML = custom ? new Date(dateObj.year, dateObj.month, dateObj.date).getDate()
                 : dateObj.date.getDate();
             if (!custom && (dateObj.date.getDate() === datePicker._particulars.currentDateSelection.getDate()
