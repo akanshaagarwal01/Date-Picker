@@ -51,10 +51,21 @@
 
         function makeDayContainer(custom, dateObj, minDate, maxDate) {
             let offRange = false;
-            if (!custom && ((dateObj.date.getFullYear() === minDate.getFullYear() && dateObj.date.getMonth() === minDate.getMonth()
-                && dateObj.date.getDate() < minDate.getDate()) ||
-                (dateObj.date.getFullYear() === maxDate.getFullYear() && dateObj.date.getMonth() === maxDate.getMonth()
-                    && dateObj.date.getDate() > maxDate.getDate()))) {
+            //if minDate or maxDate, or both restrictons exist, the dates beyond them should be rendered as non-selectable. 
+            if (!custom && (minDate || maxDate) &&
+                ((!minDate ||
+                    (minDate &&
+                        (dateObj.date.getFullYear() === minDate.getFullYear()
+                            && dateObj.date.getMonth() === minDate.getMonth()
+                            && dateObj.date.getDate() < minDate.getDate()))
+                ) ||
+                    (!maxDate ||
+                        (maxDate &&
+                            (dateObj.date.getFullYear() === maxDate.getFullYear()
+                                && dateObj.date.getMonth() === maxDate.getMonth()
+                                && dateObj.date.getDate() > maxDate.getDate()))
+                    ))
+            ) {
                 offRange = true;
             }
             let dayContainer = document.createElement('div');
@@ -81,12 +92,12 @@
             event.target.classList.add("selectedDate");
             let date = new Date(year, month, event.target.textContent);
             datePicker._particulars.currentDateSelection = date;
-            document.getElementById(`selected-${this._id}`).innerHTML =
-                `${event.target.textContent}-${this._monthObj.getMonthInWords(month)}-${year}`;
+            if (datePicker._particulars.onDateSelect) {
+                datePicker._particulars.onDateSelect(datePicker._particulars);
+            }
             document.getElementById(`container-${this._id}`).remove();
         }
     }
-
 
     window.Calendar = Calendar;
 })();
