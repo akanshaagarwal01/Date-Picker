@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="index.css">
 </head>
 
-<body style="background-color: rgba(3, 3, 61, 0.938)">
+<body>
     <script src="month.js"></script>
     <script src="calendar.js"></script>
     <script src="headers.js"></script>
@@ -24,15 +24,15 @@
         //callback functions for date, month and year change
 
         function onDateSelect(updatedParticulars) {
-            console.log(updatedParticulars);
+            console.log(updatedParticulars.currentDateSelection);    //do something with the updated date
         }
 
         function onMonthChange(updatedParticulars) {
-            console.log(updatedParticulars);
+            console.log(updatedParticulars.updatedMonth);       //do something with/on the updated month
         }
 
         function onYearChange(updatedParticulars) {
-            console.log(updatedParticulars);
+            console.log(updatedParticulars.updatedYear);        //do something with/on the updated date
         }
 
         function callDatePicker() {

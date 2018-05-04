@@ -1,73 +1,74 @@
 .container {
     margin-top: 10px;
-    width:420px;
-    padding:15px;
+    width:400px;
     position: absolute;
     z-index:1000;
     background-color: #ffffff;
+    border:1px solid rgb(8, 34, 73);
 }
 
 .headerContainer {
     display:flex;
     flex-wrap: wrap;
-    width:420px;
+    width:100%;
     justify-content: space-between;
-    padding:5px 0px;
+    background-color: rgb(8, 34, 73);
+    padding:20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .monthHeader {
     display: inline-block;
-    width:150px;
+    width:40%;
+    height:20px;
+    line-height: 15px;
     text-align: center;
-    padding:10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color:rgb(53, 53, 245);
-    font-weight: bold;
+    color:rgb(248, 247, 247);
 }
 
 .yearHeader {
     display: inline-block;
-    padding:10px;
-    width:150px;
+    width:30%;
+    height:20px;
+    line-height: 15px;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color:rgb(53, 53, 245);
-    font-weight: bold;
+    color:rgb(248, 247, 247);
 }
 
 .weekHeader {
-    width:100%;
-    padding-top:10px;
+    margin: auto;
+    padding:25px 0px 8px 0px;
+    border-bottom: 1px solid rgb(248, 247, 247);
 }
 
 .left {
-    height:20px;
-    width:15px;
     cursor:pointer;
     float:left;
 }
 
 .right{
-    transform: rotate(180deg);
-    height:20px;
-    width:15px;
+    transform: rotateY(180deg);
     cursor:pointer;
     float:right;
 }
 
 .dayHeader {
-    height : 50px;
-    width : 60px;
+    height : 30px;
+    width : 50px;
     display: inline-block;
     box-sizing: border-box;
     text-align: center;
     padding:10px;
-    color: rgb(53, 53, 245);
+    color: rgb(248, 247, 247);
+    font-size:12px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .inactive {
-    color:grey;
+    color:rgb(153, 151, 151);
     cursor: not-allowed;
 }
 
@@ -75,23 +76,30 @@
     cursor:pointer;
 }
 
+.monthContainer {
+    width:88%;
+    margin:auto;
+    padding: 15px 0px;
+}
+
 .dayContainer {
-    height : 40px;
-    width : 60px;
+    height : 35px;
+    width : 50px;
     display: inline-block;
     padding:10px;
     box-sizing: border-box;
     text-align: center;
+    font-size:12px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .active:hover {
-    background-color: rgb(145, 145, 248);
+    background-color: rgba(8, 34, 73, 0.582);
     color:#ffffff;
     box-sizing: border-box;
 }
 
 .selectedDate {
-    background-color: rgb(53, 53, 245);
+    background-color:rgb(8, 34, 73);
     color:#ffffff;
 }
