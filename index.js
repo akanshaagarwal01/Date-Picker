@@ -1,0 +1,1 @@
+module.exports = require('./datePicker.min.js');

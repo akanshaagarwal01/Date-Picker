@@ -2,6 +2,7 @@
   "name": "date-picker-light",
   "version": "1.0.1",
   "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -9,8 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/akanshaagarwal01/Date-Picker.git"
   },
-  "keywords": ["datepicker", "date-picker", "date-picker-light", "calendar"],
-  "author": "",
+  "keywords": [
+    "datepicker",
+    "date-picker",
+    "date-picker-light",
+    "calendar"
+  ],
+  "author": "akansha.agarwal018@gmail.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/akanshaagarwal01/Date-Picker/issues"
