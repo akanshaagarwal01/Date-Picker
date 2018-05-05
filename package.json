@@ -9,6 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/akanshaagarwal01/Date-Picker.git"
   },
+  "keywords": ["datepicker", "date-picker", "date-picker-light"],
   "author": "",
   "license": "ISC",
   "bugs": {
