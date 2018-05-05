@@ -1,7 +1,8 @@
+import Month from './month';
 (function () {
     function Calendar(id) {
         this._id = id;
-        this._monthObj = new Month();
+        this._monthObj = new window.Month();
     }
 
     Calendar.prototype.renderCalendar = function (currDateSelection, minDate, maxDate, datePicker) {
@@ -98,6 +99,8 @@
             document.getElementById(`container-${this._id}`).remove();
         }
     }
-
     window.Calendar = Calendar;
+    return Calendar;
 })();
+
+// export default Calendar;

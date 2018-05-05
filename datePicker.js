@@ -1,3 +1,6 @@
+import Month from './month';
+import Headers from './headers';
+import Calendar from './calendar';
 (function () {
     function DatePicker(parent, particulars) {
         this._parent = parent;
@@ -7,9 +10,9 @@
         this._minDate = this._particulars.minDate ? new Date(this._particulars.minDate) : undefined;
         this._maxDate = this._particulars.maxDate ? new Date(this._particulars.maxDate) : undefined;
         this._id = this._particulars.id;
-        this._monthObj = new Month();
-        this._headers = new Headers(this._id);
-        this._calendar = new Calendar(this._id);
+        this._monthObj = new window.Month();
+        this._headers = new window.Headers(this._id);
+        this._calendar = new window.Calendar(this._id);
         DatePicker.prototype.renderDatePicker.call(this);
     };
 
@@ -40,6 +43,6 @@
             }
         }
     };
-
     window.DatePicker = DatePicker;
+    return DatePicker;
 })();

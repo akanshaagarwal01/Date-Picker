@@ -1,0 +1,25 @@
+{
+  "name": "date-picker-sleek",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akanshaagarwal01/Date-Picker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akanshaagarwal01/Date-Picker/issues"
+  },
+  "homepage": "https://github.com/akanshaagarwal01/Date-Picker#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-latest": "^6.24.1",
+    "webpack": "^4.7.0",
+    "webpack-cli": "^2.1.2"
+  }
+}

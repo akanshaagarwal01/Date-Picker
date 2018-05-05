@@ -1,8 +1,10 @@
+import Month from './month';
+import Calendar from './calendar';
 (function () {
     function Headers(id) {
         this._id = id;
-        this._monthObj = new Month();
-        this._calendar = new Calendar(this._id);
+        this._monthObj = new window.Month();
+        this._calendar = new window.Calendar(this._id);
         this._DOMElements = {};
     }
 
@@ -192,7 +194,7 @@
         let currYear = +this._DOMElements.yearName.textContent;
         let monthName = +this._monthObj.getMonthInNumber(this._DOMElements.monthName.textContent);
         if (!this._DOMElements.prevYearArrow.classList.contains("inactive")) {
-            yearName = +currYear - 1;
+            let yearName = +currYear - 1;
             this._DOMElements.yearName.textContent = yearName;
             let date = new Date(yearName, monthName, 1);
             document.getElementById(`monthContainer-${this._id}`).replaceWith(this._calendar.renderCalendar(date, minDate, maxDate, datePicker));
@@ -262,8 +264,8 @@
             5: "FRIDAY",
             6: "SATURDAY"
         };
-        for (day in daysOfWeek) {
-            dayHeader = document.createElement('div');
+        for (const day in daysOfWeek) {
+            let dayHeader = document.createElement('div');
             dayHeader.className = "dayHeader";
             dayHeader.id = `dayHeader-${this._id}`;
             dayHeader.innerHTML = daysOfWeek[day].slice(0, 3);
@@ -271,6 +273,8 @@
         }
         return weekHeader;
     }
-
     window.Headers = Headers;
+    return Headers;
 })();
+
+// export default Headers;

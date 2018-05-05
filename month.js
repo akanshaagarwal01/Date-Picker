@@ -29,6 +29,6 @@
 
         }
     }
-
     window.Month = Month;
+    return Month;
 })();
