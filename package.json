@@ -1,6 +1,6 @@
 {
-  "name": "date-picker-light",
-  "version": "1.0.2",
+  "name": "pure-date-picker",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,9 +12,12 @@
   },
   "keywords": [
     "datepicker",
-    "date-picker",
-    "date-picker-light",
-    "calendar"
+    "date picker",
+    "date",
+    "picker",
+    "calendar",
+    "javascript",
+    "vanilla"
   ],
   "author": "akansha.agarwal018@gmail.com",
   "license": "ISC",
